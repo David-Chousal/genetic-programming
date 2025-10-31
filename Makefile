@@ -9,18 +9,15 @@ CXXFLAGS=$(OPT) $(STD)
 
 SRCS=select.cxx arena.cxx dna.cxx life.cxx main.cxx
 OBJS=$(SRCS:.cxx=.o)
-ALL=genetic dnatest
+ALL=genetic
 
 all: $(ALL)
 
 genetic:	$(OBJS)
 	$(CXX) -o $@ $(CXXFLAGS) $+
 
-dnatest:	dnamain.o dna.o
-	$(CXX) -o $@ $(CXXFLAGS) $+
-
 clean:
-	/bin/rm -f $(ALL) $(OBJS) dnamain.o
+	/bin/rm -f $(ALL) $(OBJS)
 	/bin/rm -rf $(ALL:=.dSYM)
 
 depend: $(SRCS) 
@@ -36,4 +33,3 @@ arena.o: arena.cxx rng.h dna.h life.h select.h arena.h
 dna.o: dna.cxx rng.h dna.h
 life.o: life.cxx rng.h dna.h life.h
 main.o: main.cxx rng.h dna.h life.h select.h arena.h
-dnamain.o: dnamain.cxx rng.h dna.h
